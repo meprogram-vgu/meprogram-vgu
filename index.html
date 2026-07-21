@@ -1,0 +1,326 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Student Portal | VGU</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@500&display=swap" rel="stylesheet">
+<style>
+  :root{--navy:#003366;--navy-deep:#001f3f;--ink:#1c2733;--muted:#5b6772;--hair:#e4e9ef;
+    --page:#eef1f5;--card:#fff;--gold:#c19a2e;
+    --pdf-bg:#fbeae8;--pdf-fg:#9a3127;--form-bg:#e8f3ec;--form-fg:#2c6b3f;
+    --sheet-bg:#e6f0fb;--sheet-fg:#1a578f;--web-bg:#efeafa;--web-fg:#553a96;
+    --file-bg:#eef1f4;--file-fg:#475260;--mail-bg:#fdf1e3;--mail-fg:#8a5a16;}
+  *{box-sizing:border-box;}html{scroll-behavior:smooth;}
+  body{margin:0;background:var(--page);color:var(--ink);font-family:'IBM Plex Sans',system-ui,-apple-system,'Segoe UI',sans-serif;line-height:1.6;-webkit-font-smoothing:antialiased;}
+  a{color:inherit;text-decoration:none;}
+  .logobar{background:#fff;border-bottom:1px solid var(--hair);}
+  .logobar .logos{max-width:1080px;margin:0 auto;padding:13px 24px;display:flex;align-items:center;gap:18px;}
+  .vgu-logo{height:46px;width:auto;display:block;}
+  .logo-div{width:1px;height:36px;background:var(--hair);}
+  .rub-logo{height:46px;width:auto;display:block;}
+  .hero{background:var(--navy);color:#fff;padding:40px 24px 34px;border-bottom:3px solid var(--gold);}
+  .hero-inner{max-width:1080px;margin:0 auto;}
+  .eyebrow{font-family:'IBM Plex Mono',monospace;font-size:12px;letter-spacing:.22em;text-transform:uppercase;color:#9fc0e6;margin:0 0 10px;}
+  .hero h1{font-size:31px;font-weight:700;letter-spacing:-.01em;margin:0 0 8px;line-height:1.12;}
+  .hero p.lead{font-size:15px;color:#cdddef;margin:0 0 22px;max-width:640px;}
+  .searchwrap{position:relative;max-width:520px;}
+  .searchwrap svg{position:absolute;left:15px;top:50%;transform:translateY(-50%);opacity:.5;}
+  #search{width:100%;padding:13px 16px 13px 44px;font-size:15px;font-family:inherit;border:1.5px solid transparent;border-radius:10px;background:#fff;color:var(--ink);outline:none;transition:box-shadow .15s,border-color .15s;}
+  #search:focus{border-color:var(--gold);box-shadow:0 0 0 4px rgba(193,154,46,.28);}
+  .count{font-size:13px;color:#9fc0e6;margin:11px 2px 0;font-family:'IBM Plex Mono',monospace;}
+  nav.tabs{position:sticky;top:0;z-index:10;background:#fff;border-bottom:1px solid var(--hair);}
+  nav.tabs .inner{max-width:1080px;margin:0 auto;padding:0 16px;display:flex;gap:4px;overflow-x:auto;}
+  nav.tabs a{padding:14px 14px;font-size:13.5px;font-weight:600;color:var(--muted);white-space:nowrap;border-bottom:2.5px solid transparent;transition:color .15s,border-color .15s;}
+  nav.tabs a:hover{color:var(--navy);}
+  nav.tabs a.active{color:var(--navy);border-bottom-color:var(--gold);}
+  main{max-width:1080px;margin:0 auto;padding:8px 24px 64px;}
+  section.sec{padding:30px 0 6px;scroll-margin-top:58px;}
+  .sec-head{display:flex;align-items:baseline;gap:12px;margin:0 0 6px;}
+  .sec-head .num{font-family:'IBM Plex Mono',monospace;font-size:12px;color:var(--gold);font-weight:500;}
+  .sec-head h2{font-size:21px;font-weight:700;color:var(--navy);margin:0;letter-spacing:-.01em;}
+  .sec-intro{color:var(--muted);font-size:14.5px;margin:0 0 18px;max-width:760px;}
+  .subhead{font-size:13px;font-weight:600;letter-spacing:.05em;text-transform:uppercase;color:var(--navy);margin:24px 0 12px;padding-bottom:7px;border-bottom:1px solid var(--hair);}
+  .grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:12px;}
+  .card{display:flex;align-items:center;gap:14px;background:var(--card);border:1px solid var(--hair);border-radius:11px;padding:14px 16px;transition:border-color .15s,transform .12s,box-shadow .15s;}
+  a.card:hover{border-color:var(--navy);transform:translateY(-1px);box-shadow:0 6px 18px rgba(0,51,102,.10);}
+  a.card:focus-visible{outline:2px solid var(--gold);outline-offset:2px;}
+  .card .body{flex:1;min-width:0;}.card .title{font-size:14.5px;font-weight:600;color:var(--ink);margin:0;}
+  .card .sub{font-size:12.5px;color:var(--muted);margin:2px 0 0;}
+  .tag{flex-shrink:0;font-family:'IBM Plex Mono',monospace;font-size:10.5px;font-weight:500;letter-spacing:.08em;padding:4px 8px;border-radius:6px;}
+  .t-pdf{background:var(--pdf-bg);color:var(--pdf-fg);}.t-form{background:var(--form-bg);color:var(--form-fg);}
+  .t-sheet{background:var(--sheet-bg);color:var(--sheet-fg);}.t-web{background:var(--web-bg);color:var(--web-fg);}
+  .t-file{background:var(--file-bg);color:var(--file-fg);}
+  .t-slides{background:#efeafa;color:#553a96;}.t-mail{background:var(--mail-bg);color:var(--mail-fg);}
+  .arrow{flex-shrink:0;color:var(--navy);opacity:.35;transition:opacity .15s,transform .15s;}
+  a.card:hover .arrow{opacity:1;transform:translateX(3px);}
+  .card.disabled{opacity:.6;}.card.disabled .arrow{display:none;}
+  .soon{flex-shrink:0;font-family:'IBM Plex Mono',monospace;font-size:10px;letter-spacing:.06em;color:var(--muted);border:1px dashed var(--hair);padding:3px 7px;border-radius:6px;}
+  .prose{background:#fff;border:1px solid var(--hair);border-radius:12px;padding:20px 22px;margin:0 0 14px;}
+  .prose p{margin:0 0 10px;font-size:14.5px;}.prose p:last-child{margin-bottom:0;}
+  .prose strong{font-weight:600;color:var(--navy);}
+  .facts{display:flex;flex-wrap:wrap;gap:10px;margin:4px 0 18px;}
+  .fact{background:#fff;border:1px solid var(--hair);border-left:3px solid var(--gold);border-radius:8px;padding:10px 14px;min-width:160px;}
+  .fact .k{font-size:11px;letter-spacing:.04em;text-transform:uppercase;color:var(--muted);margin:0 0 3px;}
+  .fact .v{font-size:14.5px;font-weight:600;color:var(--navy);margin:0;}
+  .steps{counter-reset:s;list-style:none;padding:0;margin:0;}
+  .steps li{position:relative;padding:2px 0 14px 38px;font-size:14.5px;}
+  .steps li::before{counter-increment:s;content:counter(s);position:absolute;left:0;top:0;width:25px;height:25px;background:var(--navy);color:#fff;border-radius:50%;font-size:13px;font-weight:600;display:flex;align-items:center;justify-content:center;font-family:'IBM Plex Mono',monospace;}
+  .tablewrap{overflow-x:auto;margin:0 0 14px;-webkit-overflow-scrolling:touch;}
+  .gtable{width:100%;border-collapse:collapse;background:#fff;border:1px solid var(--hair);border-radius:10px;overflow:hidden;font-size:13.5px;min-width:540px;}
+  .gtable th{background:var(--navy);color:#fff;font-weight:600;text-align:left;padding:11px 14px;font-size:12.5px;letter-spacing:.01em;}
+  .gtable td{padding:10px 14px;border-top:1px solid var(--hair);}
+  .gtable tbody tr:nth-child(even) td{background:#f8fafc;}
+  .quiet{font-size:12px;color:var(--muted);text-decoration:underline;}
+  .empty{display:none;text-align:center;color:var(--muted);padding:36px 0;font-size:14.5px;}
+  footer{border-top:1px solid var(--hair);background:#fff;margin-top:20px;}
+  .foot-inner{max-width:1080px;margin:0 auto;padding:26px 24px;display:flex;flex-wrap:wrap;gap:22px 40px;justify-content:space-between;font-size:13px;color:var(--muted);}
+  .foot-inner strong{color:var(--ink);font-weight:600;}.contact p{margin:2px 0;}.contact a{color:var(--navy);font-weight:500;}
+  @media(max-width:560px){.hero h1{font-size:25px;}.hero{padding:32px 18px 28px;}main{padding:6px 16px 48px;}.vgu-logo{height:36px;}.rub-logo{height:36px;}.logobar .logos{gap:12px;}}
+  @media(prefers-reduced-motion:reduce){*{transition:none!important;}html{scroll-behavior:auto;}}
+</style></head><body>
+<div class="logobar"><div class="logos">
+  <img class="vgu-logo" src="data:image/png;base64,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">
+  <span class="logo-div"></span>
+  <img class="rub-logo" src="data:image/png;base64,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">
+</div></div>
+<header class="hero"><div class="hero-inner">
+  <p class="eyebrow">Vietnamese-German University &middot; Mechanical Engineering</p>
+  <h1>Student Portal</h1>
+  <p class="lead">Regulations, forms, schedules and step-by-step guidance for the Mechanical Engineering program. Type to search, or use the tabs below.</p>
+  <div class="searchwrap">
+    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#003366" stroke-width="2"><circle cx="11" cy="11" r="7"/><path d="m21 21-4.3-4.3"/></svg>
+    <input id="search" type="search" placeholder="Search regulations, forms, schedules..." aria-label="Search" autocomplete="off">
+  </div>
+  <p class="count" id="count"></p>
+</div></header>
+
+<nav class="tabs"><div class="inner">
+  <a href="#regulations">Regulations &amp; Forms</a>
+  <a href="#thesis">Thesis</a>
+  <a href="#internship">Internship</a>
+  <a href="#exam">Exam &amp; Schedule</a>
+  <a href="#scholarship">Scholarship</a>
+  <a href="#graduation">Graduation</a>
+</div></nav>
+
+<main>
+<section class="sec" id="regulations">
+  <div class="sec-head"><span class="num">01</span><h2>Regulations &amp; Forms</h2></div>
+  <p class="sec-intro">Official program regulations and the core registration forms. For exam, thesis and internship-specific forms, see the matching tab.</p>
+  <div class="subhead">Academic Regulations</div>
+  <div class="grid">
+    <a class="card" href="https://drive.google.com/file/d/1aOBLI7yJYk3Ilw97TIjR9s_1y65tkyla/view" target="_blank" rel="noopener" data-s="examination regulation english"><div class="body"><p class="title">General Examination Regulation (EN)</p><p class="sub">Bachelor &amp; Master programs</p></div><span class="tag t-pdf">PDF</span><svg class="arrow" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
+    <a class="card" href="https://vgu.edu.vn/documents/14921/7069444/General+Examination+Regulation+for+Bachelor+and+Master+programs_VN.pdf/95c2ed0c-9dcf-456a-90a9-da4250e49e54" target="_blank" rel="noopener" data-s="quy dinh dao tao cu nhan vietnamese"><div class="body"><p class="title">General Examination Regulation (VN)</p><p class="sub">Quy định đào tạo cử nhân</p></div><span class="tag t-pdf">PDF</span><svg class="arrow" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
+    <a class="card" href="https://vgu.edu.vn/documents/14921/3972694/20240918_466_QD-DHVD_Ban+hanh+Quy+che+dao+tao+Nam+dai+cuong+cua+VGU-VN.pdf/26e8982b-60bb-4250-9baf-4001584a586d" target="_blank" rel="noopener" data-s="foundation year nam dai cuong"><div class="body"><p class="title">Foundation Year Regulation</p><p class="sub">Quy chế đào tạo năm đại cương</p></div><span class="tag t-pdf">PDF</span><svg class="arrow" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
+    <a class="card" href="https://drive.google.com/file/d/1FWeKuzHBe9-HcngtHqh4JKGTqlweqJvq/view" target="_blank" rel="noopener" data-s="men program regulation nganh"><div class="body"><p class="title">MEN Program Regulation</p><p class="sub">Program-specific academic regulation (EN)</p></div><span class="tag t-pdf">PDF</span><svg class="arrow" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
+    <a class="card" href="https://drive.google.com/file/d/1NT_k-gvTWytmLSrLIG0KQTZlmqNoC3i9/view" target="_blank" rel="noopener" data-s="module handbook courses"><div class="body"><p class="title">Module Handbook</p><p class="sub">Course catalogue &amp; descriptions</p></div><span class="tag t-pdf">PDF</span><svg class="arrow" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
+    <a class="card" href="https://drive.google.com/file/d/1y9FkWO5jnHqf3QgXB31r_IIF5u--tUtJ/view" target="_blank" rel="noopener" data-s="tuition fee hoc phi"><div class="body"><p class="title">Tuition Fee Regulation</p><p class="sub">Quy định học phí</p></div><span class="tag t-pdf">PDF</span><svg class="arrow" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
+  </div>
+  <div class="subhead">Registration Forms</div>
+  <div class="grid">
+    <a class="card" href="https://forms.gle/xA5JPsopfuJEPm9LA" target="_blank" rel="noopener" data-s="major registration eda epe"><div class="body"><p class="title">Major Registration</p><p class="sub">Choose your major</p></div><span class="tag t-form">FORM</span><svg class="arrow" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
+    <a class="card" href="https://forms.gle/aqj5wxhM1SNMvUSQ8" target="_blank" rel="noopener" data-s="module course registration summer semester"><div class="body"><p class="title">Module Registration – Summer</p><p class="sub">Register courses for Summer semester</p></div><span class="tag t-form">FORM</span><svg class="arrow" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
+    <a class="card" href="https://forms.gle/mkLbFLovanfZn8Vg9" target="_blank" rel="noopener" data-s="module course registration winter semester"><div class="body"><p class="title">Module Registration – Winter</p><p class="sub">Register courses for Winter semester</p></div><span class="tag t-form">FORM</span><svg class="arrow" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
+  </div>
+</section>
+<section class="sec" id="thesis">
+  <div class="sec-head"><span class="num">02</span><h2>Bachelor Thesis</h2></div>
+  <p class="sec-intro">The Bachelor Thesis is worth 12 ECTS. Below is everything from eligibility to submission and assessment.</p>
+  <div class="facts">
+    <div class="fact"><p class="k">Eligibility</p><p class="v">172 ECTS (148 earlier intakes)</p></div>
+    <div class="fact"><p class="k">Prerequisite</p><p class="v">6-week Basic Internship</p></div>
+    <div class="fact"><p class="k">Processing time</p><p class="v">3 months</p></div>
+    <div class="fact"><p class="k">Extension</p><p class="v">Not allowed (since 2022)</p></div>
+    <div class="fact"><p class="k">Plagiarism limit</p><p class="v">&le; 10% similarity</p></div>
+    <div class="fact"><p class="k">Repeat</p><p class="v">Once, next semester</p></div>
+  </div>
+
+  <div class="subhead">1 &middot; Eligibility</div>
+  <div class="prose">
+    <p>You may register for the Bachelor Thesis once you have completed at least <strong>172 ECTS (148 ECTS for earlier intakes)</strong> and provided proof of a completed <strong>6-week Basic Internship</strong>.</p>
+    <p><strong>DAAD students</strong> doing the thesis in Germany register and submit through the RUB office - contact Dr. Monika Thol (Academic Coordinator, RUB).</p>
+  </div>
+
+  <div class="subhead">2 &middot; Registration</div>
+  <div class="prose">
+    <p>Find your thesis topic and supervisor first, then register online using the form below. The registration is signed electronically by the <strong>first supervisor</strong> and the <strong>student</strong>; the program coordinator approves it by email.</p>
+  </div>
+  <div class="grid">
+    <a class="card" href="https://forms.gle/VQQeDRKMV3SsAjVF8" target="_blank" rel="noopener" data-s="thesis registration"><div class="body"><p class="title">Thesis Registration Form</p><p class="sub">Submit your registration</p></div><span class="tag t-form">FORM</span><svg class="arrow" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
+  </div>
+
+  <div class="subhead">3 &middot; Plagiarism Check</div>
+  <div class="prose"><p>A similarity of up to <strong>10%</strong> is acceptable. Request a check account, then email the result to the librarians (cc your supervisors and Ms. Ngan).</p></div>
+  <div class="grid">
+    <a class="card" href="http://epub.vgu.edu.vn/" target="_blank" rel="noopener" data-s="thesis sources epub plagiarism"><div class="body"><p class="title">Thesis Sources (ePub VGU)</p><p class="sub">Library full-text sources</p></div><span class="tag t-web">WEB</span><svg class="arrow" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
+    <a class="card" href="https://epub.vgu.edu.vn/help/Access_guide/access-guide.html" target="_blank" rel="noopener" data-s="epub access guide"><div class="body"><p class="title">Access Guide</p><p class="sub">How to access ePub</p></div><span class="tag t-web">WEB</span><svg class="arrow" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
+    <a class="card" href="https://library.vgu.edu.vn/plagiarism-check-request/" target="_blank" rel="noopener" data-s="plagiarism check request account"><div class="body"><p class="title">Request Plagiarism Account</p><p class="sub">Account sent by email in ~5 min</p></div><span class="tag t-web">WEB</span><svg class="arrow" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
+    <a class="card" href="mailto:hang.ht@vgu.edu.vn" target="_blank" rel="noopener" data-s="librarian hang plagiarism"><div class="body"><p class="title">Librarian – Ms. Hang</p><p class="sub">hang.ht@vgu.edu.vn</p></div><span class="tag t-mail">MAIL</span><svg class="arrow" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
+    <a class="card" href="mailto:tri.ntk@vgu.edu.vn" target="_blank" rel="noopener" data-s="librarian tri plagiarism"><div class="body"><p class="title">Librarian – Ms. Tri</p><p class="sub">tri.ntk@vgu.edu.vn</p></div><span class="tag t-mail">MAIL</span><svg class="arrow" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
+  </div>
+
+  <div class="subhead">4 &middot; Submission</div>
+  <div class="prose">
+    <p>On the submission day, bring <strong>two (02) firmly bound hard copies</strong> - printed in <strong>color, single-sided</strong> (no spiral binding, no loose-leaf) - to the <strong>Program Office, Building 5, Room 528</strong>. The copies are signed and the date of receipt is recorded.</p>
+  </div>
+  <div class="grid">
+    <a class="card" href="https://forms.gle/qpy1z9aYUzJZdBn9A" target="_blank" rel="noopener" data-s="thesis submission"><div class="body"><p class="title">Thesis Submission Form</p><p class="sub">Submit the soft copy &amp; assessment form</p></div><span class="tag t-form">FORM</span><svg class="arrow" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
+  </div>
+
+  <div class="subhead">5 &middot; Assessment</div>
+  <div class="prose"><p>The assessment requires <strong>two signatures from two doctors</strong> (one or two forms). The overall grade is the <strong>arithmetic mean</strong> of the individual assessments. The evaluation procedure should not exceed <strong>8 weeks</strong>.</p></div>
+</section>
+<section class="sec" id="internship">
+  <div class="sec-head"><span class="num">03</span><h2>Internship</h2></div>
+  <p class="sec-intro">The program includes a Basic Internship and a Professional Internship. Both must be passed and reported to graduate.</p>
+
+  <div class="subhead">Basic Internship</div>
+  <div class="prose"><p>The <strong>6-week Basic Internship</strong> must be completed and proven <strong>before you can register for the Bachelor Thesis</strong>.</p></div>
+
+  <div class="subhead">Professional Internship, Report Submission</div>
+  <div class="facts">
+    <div class="fact"><p class="k">Duration</p><p class="v">14 weeks (prove full 14)</p></div>
+    <div class="fact"><p class="k">Submit</p><p class="v">Final Report + Attestation</p></div>
+    <div class="fact"><p class="k">Copies</p><p class="v">Soft + 1 bound hard copy</p></div>
+    <div class="fact"><p class="k">Grade</p><p class="v">Pass / Fail</p></div>
+  </div>
+  <div class="prose">
+    <p>Cover at least <strong>4 of the 17 internship FP areas</strong>. You may do the 14 weeks in one or two companies; each must sign and stamp the duration and content.</p>
+    <p>Submit the <strong>Final Report and Attestation Form</strong> in <strong>soft and hard copy</strong>. Bring <strong>one (01) firmly bound copy</strong> (no spiral binding, no loose-leaf); printing may be single- or double-sided. Digital signatures and PDF are accepted, but a hard copy is still required later.</p>
+    <p>Then complete the online submission form below.</p>
+  </div>
+  <div class="grid">
+    <a class="card" href="https://forms.gle/mLWD7jXfWDtNr4N57" target="_blank" rel="noopener" data-s="professional internship report submit final"><div class="body"><p class="title">Professional Internship Report</p><p class="sub">Online submission form</p></div><span class="tag t-form">FORM</span><svg class="arrow" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
+    <a class="card" href="https://drive.google.com/drive/folders/1PkSyfZrH_5ODnbwAkS4hOWZ1U5etMlJ_" target="_blank" rel="noopener" data-s="internship guidelines templates attestation sample report format"><div class="body"><p class="title">Guidelines, Templates &amp; Sample</p><p class="sub">Report format, attestation form, sample</p></div><span class="tag t-file">FOLDER</span><svg class="arrow" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
+    <a class="card" href="https://vgu.edu.vn/vi/study-programs/bachelor/me/program-structure" target="_blank" rel="noopener" data-s="internship timeline program structure"><div class="body"><p class="title">Internship Timeline</p><p class="sub">Official program timeline</p></div><span class="tag t-web">WEB</span><svg class="arrow" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
+    <a class="card" href="https://vgu.edu.vn/vi/students/student-form/?title=Huong-dan-dang-ky-cap-Giap-xac-nhan-va-Giay-gioi-thieu-danh-cho-sinh-vien-hoc-vien&amp;id-bai-viet=6225139&amp;pid=CmsHienThiBaiViet_WAR_cmsportlet_INSTANCE_3ttomlB4UobM&amp;reCall=1&amp;pagedown=0" target="_blank" rel="noopener" data-s="student confirmation letter internship"><div class="body"><p class="title">Student Confirmation Letter</p><p class="sub">Register if you need one</p></div><span class="tag t-web">WEB</span><svg class="arrow" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
+    <a class="card" href="https://forms.gle/ej4yaCmmWG96iMcy5" target="_blank" rel="noopener" data-s="internship survey feedback"><div class="body"><p class="title">Internship Survey</p><p class="sub">Update whenever status changes</p></div><span class="tag t-form">FORM</span><svg class="arrow" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
+  </div>
+
+  <div class="subhead">Q &amp; A</div>
+  <div class="prose">
+    <p><strong>Can I split the 14 weeks across two companies?</strong><br>Yes, one or two companies is fine. Each company must sign and stamp to confirm the duration and content you did there.</p>
+    <p><strong>If the first company covers all 4 fields, must I write about a second?</strong><br>If you commit to 4 specific fields for 14 weeks, spend roughly equal time per field (about 4 weeks each). Otherwise, write up every field and content you actually did, certified and stamped by the companies.</p>
+    <p><strong>The attestation lists every week. Can I group weeks with the same work?</strong><br>Yes, you can group them.</p>
+    <p><strong>Can I structure the report into 4 FP-area sections instead of week-by-week?</strong><br>Yes. Just make sure you cover at least 4 FPs.</p>
+    <p><strong>How long should each FP section be?</strong><br>It depends on your work; there is no fixed page count.</p>
+    <p><strong>Is there a sample report from a previous student?</strong><br>Yes, see "Internship Report_Sample" in the guidelines folder.</p>
+    <p><strong>My contract is about 12 weeks. Is that enough?</strong><br>You must prove a full 14 weeks. Ask your company to extend by two more weeks if possible.</p>
+    <p><strong>Where are the attestation form and report format?</strong><br>In the guidelines folder (see "Guidelines, Templates &amp; Sample").</p>
+    <p><strong>Do I need a signature and stamp for each FP, and for the attestation?</strong><br>Yes. Each FP needs the student's signature plus the company's signature and stamp; the same applies to the attestation.</p>
+    <p><strong>What is the grade scale?</strong><br>No grades, Passed / Failed only.</p>
+    <p><strong>Will my FPP (interdisciplinary project) count, and is overlap with another student OK?</strong><br>First give the MEN coordinator your project content so they can assess it. You must cover at least 4 of the 17 FPs. Who you work with does not matter; what matters is what you did and wrote.</p>
+    <p><strong>Can my company sign digitally?</strong><br>Yes, digital signatures and PDF reports are accepted. You must still submit a hard-copy report later.</p>
+    <p><strong>For a 6-month internship, must I detail the whole period?</strong><br>Focus on the tasks completed during the 14 weeks as outlined in the guidelines.</p>
+  </div>
+</section>
+<section class="sec" id="exam">
+  <div class="sec-head"><span class="num">04</span><h2>Exam &amp; Schedule</h2></div>
+  <p class="sec-intro">Attendance, exam attempts, step-back rules, and the semester schedules.</p>
+  <div class="facts">
+    <div class="fact"><p class="k">Attendance</p><p class="v">&ge; 75% to sit the exam</p></div>
+    <div class="fact"><p class="k">Attempts</p><p class="v">Max 4 per course</p></div>
+    <div class="fact"><p class="k">Step back</p><p class="v">From attempt 2, max 2&times;</p></div>
+    <div class="fact"><p class="k">Step-back deadline</p><p class="v">&ge; 2 weeks before exam</p></div>
+  </div>
+  <div class="prose">
+    <p>You must attend at least <strong>75%</strong> of class hours to be eligible for the final exam; otherwise you are barred and receive a Fail. Each course allows a maximum of <strong>four exam attempts</strong>. You may re-sit without re-taking the course on attempts 1, 2 and 4; failing the same course twice requires re-taking it before the 3rd attempt.</p>
+    <p><strong>Step back</strong> (exam postponement) is available from the 2nd attempt onward, up to <strong>two times per course</strong>, and must be requested at least two weeks before the exam date. Registering for a course counts as registering for its exam.</p>
+  </div>
+  <div class="subhead">Documents &amp; Links</div>
+  <div class="grid">
+    <a class="card" href="https://drive.google.com/file/d/14vVCAdMu_A1Wt3tnDu1T4HkqiOHceaUK/view" target="_blank" rel="noopener" data-s="rules examination day exam"><div class="body"><p class="title">Rules on Examination Day</p><p class="sub">What to bring &amp; conduct</p></div><span class="tag t-pdf">PDF</span><svg class="arrow" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
+    <a class="card" href="https://forms.gle/Aqz934veef1T8HPh6" target="_blank" rel="noopener" data-s="step back registration postpone"><div class="body"><p class="title">Step Back Registration</p><p class="sub">Postpone a re-take exam</p></div><span class="tag t-form">FORM</span><svg class="arrow" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
+    <a class="card" href="https://docs.google.com/spreadsheets/d/1UiWV_jlIPxKQNmaE4WaTT6M6f8sQZ-tiWnnShieHPmo/edit?gid=533086604#gid=533086604" target="_blank" rel="noopener" data-s="summer semester schedule"><div class="body"><p class="title">Summer Semester</p><p class="sub">Schedule &amp; exam plan</p></div><span class="tag t-sheet">SHEET</span><svg class="arrow" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
+    <a class="card" href="https://docs.google.com/spreadsheets/d/1qj2VWPYOM3MJxgFZ9SdWbXu45_TNn7XQ6g7L7JneSXw/edit?gid=1288210295#gid=1288210295" target="_blank" rel="noopener" data-s="winter semester schedule"><div class="body"><p class="title">Winter Semester</p><p class="sub">Schedule &amp; exam plan</p></div><span class="tag t-sheet">SHEET</span><svg class="arrow" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
+    <a class="card" href="https://drive.google.com/file/d/1WWiQeOV-zBtaeK43mi8xNaGW1eO6J8Mk/view" target="_blank" rel="noopener" data-s="orientation day welcome new students introduction">
+      <div class="body"><p class="title">Orientation Day</p><p class="sub">Welcome slides for new students</p></div>
+      <span class="tag t-slides">SLIDES</span>
+      <svg class="arrow" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+    </a>
+  </div>
+</section>
+<section class="sec" id="scholarship">
+  <div class="sec-head"><span class="num">05</span><h2>Scholarship</h2></div>
+  <p class="sec-intro">Merit / talent scholarships are awarded based on academic performance. See the official regulation for criteria and amounts.</p>
+  <div class="grid">
+    <a class="card" href="https://drive.google.com/file/d/1BDh23IgtajS4amjq-tNTsXOQPo5HUB56/view" target="_blank" rel="noopener" data-s="scholarship merit talent english vietnamese hoc bong tai nang"><div class="body"><p class="title">Scholarship Regulation (EN / VN)</p><p class="sub">Merit &amp; talent scholarships · Học bổng tài năng</p></div><span class="tag t-pdf">PDF</span><svg class="arrow" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
+  </div>
+</section>
+<section class="sec" id="graduation">
+  <div class="sec-head"><span class="num">06</span><h2>Graduation</h2></div>
+  <p class="sec-intro">Requirements, grade classification and the graduation ceremony.</p>
+  <div class="subhead">Requirements</div>
+  <div class="prose">
+    <p>To graduate you must: pass <strong>German 1, 2, 3 and 4</strong>; pass the <strong>Basic Internship, Professional Internship and Bachelor Thesis</strong>; submit the internship and thesis hard-copy reports; and complete <strong>210 ECTS (180 ECTS for earlier intakes)</strong>.</p>
+  </div>
+  <div class="subhead">RUB Classification</div>
+  <div class="prose">
+    <p><strong>Grade:</strong> very good &ge; 0.7 and &le; 1.5; good &gt; 1.5 and &le; 2.5; satisfactory &gt; 2.5 and &le; 3.5; sufficient &gt; 3.5 and &le; 4.0.</p>
+    <p><strong>Overall grade:</strong> with distinction - overall grade &ge; 0.7 and &lt; 1.3 and Bachelor&rsquo;s Thesis grade &ge; 0.7 and &le; 1.3; very good &le; 1.5; good &gt; 1.5 and &le; 2.5; satisfactory &gt; 2.5 and &le; 3.5; sufficient &gt; 3.5 and &le; 4.0.</p>
+    <p style="font-size:12.5px;color:var(--muted);margin-bottom:0;">ECTS = Credit Points</p>
+  </div>
+
+  <div class="subhead">VGU Classification</div>
+  <div class="tablewrap">
+    <table class="gtable">
+      <thead><tr><th>German scale</th><th>Vietnamese scale</th><th>Classification (EN)</th><th>Xếp loại (VN)</th></tr></thead>
+      <tbody>
+        <tr><td>1.0 &le; GPA &le; 1.5</td><td>9.0 &le; GPA &le; 10</td><td>Excellent</td><td>Xuất sắc</td></tr>
+        <tr><td>1.6 &le; GPA &le; 2.2</td><td>8.0 &le; GPA &lt; 9.0</td><td>Very good</td><td>Giỏi</td></tr>
+        <tr><td>2.3 &le; GPA &le; 2.9</td><td>7.0 &le; GPA &lt; 8.0</td><td>Good</td><td>Khá</td></tr>
+        <tr><td>3.0 &le; GPA &le; 3.5</td><td>6.0 &le; GPA &lt; 7.0</td><td>Average good</td><td>Trung bình khá</td></tr>
+        <tr><td>3.6 &le; GPA &le; 4.0</td><td>5.0 &le; GPA &lt; 6.0</td><td>Ordinary</td><td>Trung bình</td></tr>
+        <tr><td>4.1 &le; GPA &le; 5.0</td><td>GPA &lt; 5.0</td><td>Failed</td><td>Không đạt</td></tr>
+      </tbody>
+    </table>
+  </div>
+  <div class="subhead">Ceremony &amp; Certificates</div>
+  <div class="prose">
+    <p>The graduation ceremony is held <strong>once a year in November</strong>. Certificates can be collected in <strong>November or April</strong>; to be ready, the certificate must be issued about two months in advance. For certificate and transcript authorization, bring your original documents to the People&rsquo;s Committee of your nearest ward.</p>
+  </div>
+  <div class="subhead">Accounts</div>
+  <div class="grid">
+    <div class="card disabled" data-s="rub moodle account creation"><div class="body"><p class="title">RUB Moodle Account</p><p class="sub">Guide: RUB-account_creation.pdf – request at the program office</p></div><span class="soon">GUIDE</span></div>
+  </div>
+</section>
+<p class="empty" id="empty">No resources match your search.</p>
+</main>
+<footer><div class="foot-inner">
+  <div class="contact">
+    <p><strong>Mechanical Engineering Program &middot; VGU</strong></p>
+    <p>Program office: <a href="mailto:me_program@vgu.edu.vn">me_program@vgu.edu.vn</a></p>
+    <p>Dr. Nguyen Hong Vi – Academic Coordinator &middot; Building 5, Room 504 &middot; <a href="mailto:vi.nh@vgu.edu.vn">vi.nh@vgu.edu.vn</a></p>
+    <p>Ms. Nguyen Thanh Ngan – Program Assistant &middot; Building 5, Room 528 &middot; <a href="mailto:ngan.nt@vgu.edu.vn">ngan.nt@vgu.edu.vn</a></p>
+  </div>
+  <div class="contact" style="text-align:right;">
+    <p><strong>Need help?</strong></p>
+    <p>Email the program office or visit Building 5, Room 528.</p>
+    <p>Last updated: July 2026</p>
+  </div>
+</div></footer>
+<script>
+  const q=document.getElementById('search');
+  const cards=Array.from(document.querySelectorAll('.card'));
+  const secs=Array.from(document.querySelectorAll('section.sec'));
+  const countEl=document.getElementById('count'), emptyEl=document.getElementById('empty');
+  const total=cards.length;
+  function filter(){
+    const term=q.value.trim().toLowerCase();
+    let vis=0;
+    cards.forEach(c=>{const hay=(c.dataset.s+' '+c.textContent).toLowerCase();const show=!term||hay.includes(term);c.style.display=show?'':'none';if(show)vis++;});
+    if(term){
+      secs.forEach(s=>{const grids=s.querySelectorAll('.grid');let any=false;grids.forEach(g=>{if(Array.from(g.querySelectorAll('.card')).some(c=>c.style.display!=='none'))any=true;});s.style.display=any?'':'none';});
+      document.querySelectorAll('.prose,.facts,.subhead,.sec-intro').forEach(e=>e.style.display='none');
+    } else {
+      secs.forEach(s=>s.style.display='');
+      document.querySelectorAll('.prose,.facts,.subhead,.sec-intro').forEach(e=>e.style.display='');
+    }
+    emptyEl.style.display=vis?'none':'block';
+    countEl.textContent=term?`Showing ${vis} of ${total} links`:`${total} links across 6 sections`;
+  }
+  q.addEventListener('input',filter); filter();
+  const links=Array.from(document.querySelectorAll('nav.tabs a'));
+  const io=new IntersectionObserver(es=>{es.forEach(e=>{if(e.isIntersecting){links.forEach(l=>l.classList.toggle('active',l.getAttribute('href')==='#'+e.target.id));}});},{rootMargin:'-55px 0px -70% 0px'});
+  secs.forEach(s=>io.observe(s));
+</script></body></html>
